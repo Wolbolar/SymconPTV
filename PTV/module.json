@@ -1,0 +1,11 @@
+{
+  "id": "{0B401818-DF07-489E-BD93-4DD67BE50B29}",
+  "name": "PTV",
+  "type": 3,
+  "vendor": "Panasonic",
+  "aliases": [ "Panasonic TV" ],
+  "parentRequirements": [ "{D81638FC-5F84-4119-AC00-BABDA1B19CBC}" ],
+  "childRequirements": [],
+  "implemented": [ "{E8F5D5E0-5B3D-42A0-843E-28DA5ED71484}" ],
+  "prefix": "PTV"
+}
