@@ -3,7 +3,8 @@ class PTVHook extends IPSModule {
 
   public function Create() {
     parent::Create();
-
+    $this->RegisterPropertyString("Host", "");
+    $this->RegisterPropertyString("Port", "3777");
     $this->RegisterTimer("HookSubscribe", 0, '@PTVHook_Subscribe($_IPS[\'TARGET\']);');
   }
 
@@ -13,9 +14,8 @@ class PTVHook extends IPSModule {
 
   public function ApplyChanges() {
     parent::ApplyChanges();
-
-    $this->SetTimerInterval("HookSubscribe", 5 * 1000);
     $this->RegisterHook("/hook/panasonictv");
+    $this->Subscribe();
   }
 
   private function RegisterHook($WebHook) {
@@ -41,10 +41,10 @@ class PTVHook extends IPSModule {
     $deviceIds = IPS_GetInstanceListByModuleID('{0B401818-DF07-489E-BD93-4DD67BE50B29}');
     foreach($deviceIds as $deviceId) {
       $host = PTV_GetHost($deviceId);
-      if($host != "") {
+      if($host != '') {
         $url = "http://$host:55000/nrc/event_0";
-        $hook = "http://192.168.10.160:3777/hook/panasonictv?device_id=$deviceId";
-        IPS_LogMessage("PTVHook", "Subscribe $url");
+        $hook = "http://{$this->ReadPropertyString('Host')}:{$this->ReadPropertyString('Port')}/hook/panasonictv?device_id=$deviceId";
+        IPS_LogMessage('PTVHook', "Subscribe $url");
 
         $client = curl_init();
         curl_setopt($client, CURLOPT_URL, $url);

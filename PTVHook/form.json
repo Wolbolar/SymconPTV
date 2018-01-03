@@ -1,2 +1,7 @@
 {
+"elements":
+  [
+    { "type": "ValidationTextBox", "name": "Host", "caption": "Host" },
+    { "type": "ValidationTextBox", "name": "Port", "caption": "Port" }
+  ]
 }
