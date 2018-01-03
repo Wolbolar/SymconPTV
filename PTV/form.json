@@ -1,6 +1,7 @@
 {
-"elements":
-  [
-    { "type": "ValidationTextBox", "name": "Host", "caption": "Host" }
-  ]
+  "elements": [{
+    "type": "ValidationTextBox",
+    "name": "Host",
+    "caption": "Host"
+  }]
 }

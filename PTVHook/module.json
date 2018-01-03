@@ -3,9 +3,9 @@
   "name": "PTVHook",
   "type": 1,
   "vendor": "Panasonic",
-  "aliases": [ "Panasonic TV Hook" ],
+  "aliases": ["Panasonic TV Hook"],
   "parentRequirements": [],
-  "childRequirements": [ "{E8F5D5E0-5B3D-42A0-843E-28DA5ED71484}" ],
-  "implemented": [ "{D81638FC-5F84-4119-AC00-BABDA1B19CBC}" ],
+  "childRequirements": ["{E8F5D5E0-5B3D-42A0-843E-28DA5ED71484}"],
+  "implemented": ["{D81638FC-5F84-4119-AC00-BABDA1B19CBC}"],
   "prefix": "PTVHook"
 }
