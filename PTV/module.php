@@ -12,7 +12,7 @@ class PTV extends IPSModule
         parent::Destroy();
     }
 
-    protected function GetHost()
+    public function GetHost()
     {
         return $this->ReadPropertyString('Host');
     }
