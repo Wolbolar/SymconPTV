@@ -240,7 +240,7 @@ class PTV extends IPSModule
         $this->SendKey($key);
     }
 
-    public function Return()
+    public function KeyReturn()
     {
         $key = "NRC_RETURN-ONOFF";  // Return
         $this->SendKey($key);
