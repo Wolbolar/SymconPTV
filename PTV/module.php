@@ -48,7 +48,7 @@ class PTV extends IPSModule
     }
     }
 
-    public function GetValue($key)
+    public function GetValue(string $key)
     {
         return GetValue(@IPS_GetObjectIDByIdent($key, $this->InstanceID));
     }
@@ -63,14 +63,14 @@ class PTV extends IPSModule
         $this->SetState(false);
     }
 
-    public function SetState($on = true)
+    public function SetState(bool $on = true)
     {
         if ($this->GetValue('STATE') != $on) {
             $this->SendKey('NRC_POWER-ONOFF');
         }
     }
 
-    public function SendKey($keyCode)
+    public function SendKey(string $keyCode)
     {
         return $this->SoapRequest(
       'nrc/control_0',
