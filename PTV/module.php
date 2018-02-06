@@ -63,7 +63,7 @@ class PTV extends IPSModule
         $this->SetState(false);
     }
 
-    public function SetState(bool $on = true)
+    public function SetState(bool $on)
     {
         if ($this->GetValue('STATE') != $on) {
             $this->SendKey('NRC_POWER-ONOFF');
@@ -116,7 +116,7 @@ class PTV extends IPSModule
         }
     }
 
-    public function getVolume()
+    public function GetVolume()
     {
         return $this->SoapRequest(
             'dmr/control_0',
@@ -127,7 +127,7 @@ class PTV extends IPSModule
         );
     }
 
-    public function getMute()
+    public function GetMute()
     {
         return $this->SoapRequest(
             'dmr/control_0',
@@ -138,7 +138,7 @@ class PTV extends IPSModule
         );
     }
 
-    public function setMute(bool $enable = false)
+    public function SetMute(bool $enable)
     {
         $data = ($enable) ? '1' : '0';
         return $this->SoapRequest(
@@ -150,7 +150,7 @@ class PTV extends IPSModule
         );
     }
 
-    public function setVolume(integer $volume = 0)
+    public function SetVolume(integer $volume)
     {
         $volume = intval($volume);
         if ($volume > 100 || $volume < 0)
