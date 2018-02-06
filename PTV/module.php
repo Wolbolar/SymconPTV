@@ -122,7 +122,8 @@ class PTV extends IPSModule
             'dmr/control_0',
             'schemas-upnp-org:service:RenderingControl:1',
             'GetVolume',
-            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>')
+            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>',
+                  'returnXml' => true)
         );
     }
 
@@ -132,7 +133,8 @@ class PTV extends IPSModule
             'dmr/control_0',
             'schemas-upnp-org:service:RenderingControl:1',
             'GetMute',
-            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>')
+            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>',
+                  'returnXml' => true)
         );
     }
 
@@ -143,7 +145,8 @@ class PTV extends IPSModule
             'dmr/control_0',
             'schemas-upnp-org:service:RenderingControl:1',
             'SetMute',
-            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredMute>'.$data.'</DesiredMute>')
+            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredMute>'.$data.'</DesiredMute>',
+                  'returnXml' => true)
         );
     }
 
@@ -158,7 +161,8 @@ class PTV extends IPSModule
             'dmr/control_0',
             'schemas-upnp-org:service:RenderingControl:1',
             'SetVolume',
-            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredVolume>'.$volume.'</DesiredVolume>', 'returnXml' => true)
+            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredVolume>'.$volume.'</DesiredVolume>',
+                  'returnXml' => true)
         );
     }
 
