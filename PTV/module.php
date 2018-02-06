@@ -138,7 +138,7 @@ class PTV extends IPSModule
         );
     }
 
-    protected function setMute($enable = false)
+    public function setMute(bool $enable = false)
     {
         $data = ($enable) ? '1' : '0';
         return $this->SoapRequest(
@@ -150,7 +150,7 @@ class PTV extends IPSModule
         );
     }
 
-    protected function setVolume($volume = '0')
+    public function setVolume(integer $volume = 0)
     {
         $volume = intval($volume);
         if ($volume > 100 || $volume < 0)
