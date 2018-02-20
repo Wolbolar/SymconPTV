@@ -73,20 +73,4 @@ class PTVHook extends IPSModule
             }
         }
     }
-
-    protected function ProcessHookData()
-    {
-        $input = file_get_contents("php://input");
-        $properties = array();
-        foreach (simplexml_load_string($input)->xpath('//e:property') as $property) {
-            foreach ($property as $key => $value) {
-                $properties[(string)$key] = (string)$value;
-            }
-        }
-
-        $xml = simplexml_load_string($data)['e:propertyset'];
-        $sendData = array("DataID" => "{E8F5D5E0-5B3D-42A0-843E-28DA5ED71484}", "DeviceID" => (integer)$_GET['device_id'], "Properties" => $properties);
-        $this->SendDataToChildren(json_encode($sendData));
-        IPS_LogMessage("PTVHook", "Event");
-    }
 }

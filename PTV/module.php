@@ -123,7 +123,7 @@ class PTV extends IPSModule
             'schemas-upnp-org:service:RenderingControl:1',
             'GetVolume',
             array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>',
-                  'returnXml' => true)
+                  'returnXml' => false)
         );
     }
 
@@ -134,7 +134,7 @@ class PTV extends IPSModule
             'schemas-upnp-org:service:RenderingControl:1',
             'GetMute',
             array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>',
-                  'returnXml' => true)
+                  'returnXml' => false)
         );
     }
 
