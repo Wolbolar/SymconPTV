@@ -107,7 +107,7 @@ class PTV extends IPSModule
         } else {
             $xml = simplexml_load_string($data);
             if ($xml === false) {
-                return false;
+                trigger_error('SoapRequest failed (action = '.$action . ')');
             }
             $ns = $xml->getNamespaces(true);
             $soap = $xml->children($ns['s']);
@@ -118,23 +118,23 @@ class PTV extends IPSModule
 
     public function GetVolume()
     {
-        return $this->SoapRequest(
+        return (int) $this->SoapRequest(
             'dmr/control_0',
             'schemas-upnp-org:service:RenderingControl:1',
             'GetVolume',
             array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>',
-                  'returnXml' => true)
+                  'returnXml' => false)
         );
     }
 
     public function GetMute()
     {
-        return $this->SoapRequest(
+        return (boolean) $this->SoapRequest(
             'dmr/control_0',
             'schemas-upnp-org:service:RenderingControl:1',
             'GetMute',
             array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>',
-                  'returnXml' => true)
+                  'returnXml' => false)
         );
     }
 
