@@ -129,13 +129,13 @@ class PTV extends IPSModule
 
     public function GetMute()
     {
-        return (boolean) $this->SoapRequest(
+        return (boolean) ((int) $this->SoapRequest(
             'dmr/control_0',
             'schemas-upnp-org:service:RenderingControl:1',
             'GetMute',
             array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>',
                   'returnXml' => false)
-        );
+        ));
     }
 
     public function SetMute(bool $enable)
