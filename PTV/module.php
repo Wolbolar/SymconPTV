@@ -48,7 +48,7 @@ class PTV extends IPSModule
     }
     }
 
-    public function GetValue($key)
+    public function GetValue(string $key)
     {
         return GetValue(@IPS_GetObjectIDByIdent($key, $this->InstanceID));
     }
@@ -63,14 +63,14 @@ class PTV extends IPSModule
         $this->SetState(false);
     }
 
-    public function SetState($on = true)
+    public function SetState(bool $on)
     {
         if ($this->GetValue('STATE') != $on) {
             $this->SendKey('NRC_POWER-ONOFF');
         }
     }
 
-    public function SendKey($keyCode)
+    public function SendKey(string $keyCode)
     {
         return $this->SoapRequest(
       'nrc/control_0',
@@ -107,7 +107,7 @@ class PTV extends IPSModule
         } else {
             $xml = simplexml_load_string($data);
             if ($xml === false) {
-                return false;
+                trigger_error('SoapRequest failed (action = '.$action . ')');
             }
             $ns = $xml->getNamespaces(true);
             $soap = $xml->children($ns['s']);
@@ -116,38 +116,41 @@ class PTV extends IPSModule
         }
     }
 
-    public function getVolume()
+    public function GetVolume()
     {
-        return $this->SoapRequest(
+        return (int) $this->SoapRequest(
             'dmr/control_0',
             'schemas-upnp-org:service:RenderingControl:1',
             'GetVolume',
-            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>')
+            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>',
+                  'returnXml' => false)
         );
     }
 
-    public function getMute()
+    public function GetMute()
     {
-        return $this->SoapRequest(
+        return (boolean) ((int) $this->SoapRequest(
             'dmr/control_0',
             'schemas-upnp-org:service:RenderingControl:1',
             'GetMute',
-            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>')
-        );
+            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel>',
+                  'returnXml' => false)
+        ));
     }
 
-    protected function setMute($enable = false)
+    public function SetMute(bool $enable)
     {
         $data = ($enable) ? '1' : '0';
         return $this->SoapRequest(
             'dmr/control_0',
             'schemas-upnp-org:service:RenderingControl:1',
             'SetMute',
-            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredMute>'.$data.'</DesiredMute>')
+            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredMute>'.$data.'</DesiredMute>',
+                  'returnXml' => true)
         );
     }
 
-    protected function setVolume($volume = '0')
+    public function SetVolume(integer $volume)
     {
         $volume = intval($volume);
         if ($volume > 100 || $volume < 0)
@@ -158,7 +161,8 @@ class PTV extends IPSModule
             'dmr/control_0',
             'schemas-upnp-org:service:RenderingControl:1',
             'SetVolume',
-            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredVolume>'.$volume.'</DesiredVolume>', 'returnXml' => true)
+            array('args' => '<InstanceID>0</InstanceID><Channel>Master</Channel><DesiredVolume>'.$volume.'</DesiredVolume>',
+                  'returnXml' => true)
         );
     }
 
