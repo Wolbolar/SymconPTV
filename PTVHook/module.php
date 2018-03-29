@@ -83,10 +83,39 @@ class PTVHook extends IPSModule
                 $properties[(string)$key] = (string)$value;
             }
         }
-
-        $xml = simplexml_load_string($data)['e:propertyset'];
+		$this->SendDebug("Panaonic TV", $properties,0);
+        // $xml = simplexml_load_string($data)['e:propertyset'];
         $sendData = array("DataID" => "{E8F5D5E0-5B3D-42A0-843E-28DA5ED71484}", "DeviceID" => (integer)$_GET['device_id'], "Properties" => $properties);
         $this->SendDataToChildren(json_encode($sendData));
         IPS_LogMessage("PTVHook", "Event");
     }
+
+	/**
+	 * Ergänzt SendDebug um Möglichkeit Objekte und Array auszugeben.
+	 *
+	 * @access protected
+	 * @param string $Message Nachricht für Data.
+	 * @param mixed $Data Daten für die Ausgabe.
+	 */
+	protected function SendDebug($Message, $Data, $Format)
+	{
+		if (is_object($Data)) {
+			foreach ($Data as $Key => $DebugData) {
+
+				$this->SendDebug($Message . ":" . $Key, $DebugData, 0);
+			}
+		} else if (is_array($Data)) {
+			foreach ($Data as $Key => $DebugData) {
+				$this->SendDebug($Message . ":" . $Key, $DebugData, 0);
+			}
+		} else if (is_bool($Data)) {
+			$this->SendDebug($Message, ($Data ? 'TRUE' : 'FALSE'), 0);
+		} else {
+			if (IPS_GetKernelRunlevel() == KR_READY) {
+				parent::SendDebug($Message, (string) $Data, $Format);
+			} else {
+				IPS_LogMessage('SSDPTest:' . $Message, (string) $Data);
+			}
+		}
+	}
 }
