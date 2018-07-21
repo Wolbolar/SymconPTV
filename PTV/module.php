@@ -48,9 +48,9 @@ class PTV extends IPSModule
     }
     }
 
-    public function GetValue(string $key)
+    public function GetValue($Ident)
     {
-        return GetValue(@IPS_GetObjectIDByIdent($key, $this->InstanceID));
+        return GetValue(@IPS_GetObjectIDByIdent($Ident, $this->InstanceID));
     }
 
     public function SetPowerOn()
@@ -63,14 +63,14 @@ class PTV extends IPSModule
         $this->SetState(false);
     }
 
-    public function SetState(bool $on)
+    public function SetState($on)
     {
         if ($this->GetValue('STATE') != $on) {
             $this->SendKey('NRC_POWER-ONOFF');
         }
     }
 
-    public function SendKey(string $keyCode)
+    public function SendKey($keyCode)
     {
         return $this->SoapRequest(
       'nrc/control_0',
@@ -138,7 +138,7 @@ class PTV extends IPSModule
         ));
     }
 
-    public function SetMute(bool $enable)
+    public function SetMute($enable)
     {
         $data = ($enable) ? '1' : '0';
         return $this->SoapRequest(
@@ -150,7 +150,7 @@ class PTV extends IPSModule
         );
     }
 
-    public function SetVolume(integer $volume)
+    public function SetVolume($volume)
     {
         $volume = intval($volume);
         if ($volume > 100 || $volume < 0)
