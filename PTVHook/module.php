@@ -83,7 +83,7 @@ class PTVHook extends IPSModule
                 $properties[(string)$key] = (string)$value;
             }
         }
-		$this->SendDebug("Panaonic TV", $properties,0);
+		$this->SendDebug("Panaonic TV", json_encode($properties),0);
         // $xml = simplexml_load_string($data)['e:propertyset'];
         $sendData = array("DataID" => "{E8F5D5E0-5B3D-42A0-843E-28DA5ED71484}", "DeviceID" => (integer)$_GET['device_id'], "Properties" => $properties);
         $this->SendDataToChildren(json_encode($sendData));
