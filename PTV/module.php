@@ -83,6 +83,35 @@ class PTV extends IPSModule
     );
     }
 
+	public function Netflix()
+	{
+		$productid = "App.NETFLIX";  // Netflix
+		$this->LaunchApp($productid);
+	}
+
+	public function Recorded_TV()
+	{
+		$productid = "App.RECORDED_TV";  // recorded tv
+		$this->LaunchApp($productid);
+	}
+
+	/** Launch App
+	 * @param $productid
+	 * @return mixed|SimpleXMLElement
+	 */
+	public function LaunchApp($productid)
+	{
+		return $this->SoapRequest(
+			'nrc/control_0',
+			'panasonic-com:service:p00NetworkControl:1',
+			'X_LaunchApp',
+			array(
+				'args' => '<X_AppType>vc_app</X_AppType><X_LaunchKeyword>product_id=' . $productid . '</X_LaunchKeyword>',
+				'returnXml' => true
+			)
+		);
+	}
+
     private function SoapRequest($path, $urn, $action, $option = array())
     {
         $input = '<'.'?xml version="1.0" encoding="utf-8"?'.'>
