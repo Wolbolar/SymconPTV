@@ -83,16 +83,6 @@ class PTV extends IPSModule
     );
     }
 
-	public function Netflix()
-	{
-		$this->LaunchApp('0010000200000001'); //Netflix
-	}
-
-	public function Recorded_TV()
-	{
-		$this->LaunchApp('0387878700000013'); // recorded tv
-	}
-
 	/** Launch App
 	 * @param $productid
 	 * @return mixed|SimpleXMLElement

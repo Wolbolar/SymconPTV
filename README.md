@@ -87,7 +87,7 @@ Sendet zum Fernseher mit der InstanzID $InstanzID den Tastencode $Key.
 Die Funktion liefert keinerlei Rückgabewert.
 `PTV_SendKey(12345, 'NRC_CH_DOWN-ONOFF');`
 
-### 8. Tastencodes
+##### bekannte Tastencodes für SendKey
 
 Tastencode            | Taste
 --------------------- | ----------------
@@ -170,3 +170,57 @@ NRC_TV_MUTE_ON-ONOFF  |
 NRC_TV_MUTE_OFF-ONOFF |
 NRC_DMS_CH_UP-ONOFF   |
 NRC_DMS_CH_DOWN-ONOFF |
+NRC_APPS-ONOFF        | Apps Menü
+
+`PTV_LaunchApp(integer $InstanzID, string $productid);`
+Startet auf dem Fernseher mit der InstanzID $InstanzID die zur ProductID $productid gehörige Applikation. 
+Die Funktion liefert keinen Rückgabewert.
+
+##### bekannte ProductIDs für PTV_LaunchApp
+
+ProductID            | Applikation
+---------------------| ----------------
+0010000100000001     | Amazon Prime
+0010000300000001     | Cinema Now
+0010000600000001     | Pandora
+0010000F00000001     | Hulu Plus
+0010001200000001     | WSJ Live
+0010001300000001     | Vudu HD
+0020000600000001     | Arte
+0020000E00000001     | Bild
+0020001200000001     | Cine Trailer
+0020007100000001     | Meteo News
+0020004000000001     | RossiaTV
+0020004700000001     | Chili
+002002A00000002      | RakutenTV
+002003F00000001      | Maxdome
+0070000200000001     | YouTube
+0070000600000001     | Skype
+0070000900000001     | Weather
+0070001406000008     |Match Number Beginners
+007000C00000001      | Accu Weather
+00760108070000001    | ARD
+0077777700000001     | Produkt Support
+0077777700000002     | Web Browser
+00777777001140002    | Browser
+0076002307000001     | Digital Concert
+0076010507000001     | Plex
+0076011607000001     | Netzkino
+0387878700000001     | TV
+0387878700000003     | TV Guide
+0387878700000009     | Menü
+0387878700000013     | Media Player Aufnahmen (Recorded TV)
+0387878700000014     | DLNA Player
+0387878700000016     | Viera Link
+0387878700000022     | Jotter
+0387878700000026     | Paint
+0387878700000032     | Media Player
+0387878700000036     | Put Three
+0387878700000037     | Family Riversi
+0387878700000038     | Touch Connect
+0387878700000049     | Mirroring
+0387878700000050     | Multi Window
+0387878700000032     | Media Player
+0387878700000102     | Apps Market
+0387878700150020     | Kalendar
+
