@@ -112,7 +112,7 @@ NRC_LEFT-ONOFF        | Left
 NRC_UP-ONOFF          | Up
 NRC_DOWN-ONOFF        | Down
 NRC_3D-ONOFF          | 3D
-NRC_SD_CARD-ONOFF     | SD-Card
+NRC_SD_CARD-ONOFF     | Media Player
 NRC_DISP_MODE-ONOFF   | Aspect ratio
 NRC_MENU-ONOFF        | Menu
 NRC_INTERNET-ONOFF    | VIERA connect
@@ -146,6 +146,10 @@ NRC_D9-ONOFF          | 9
 NRC_P_NR-ONOFF        | Noise reduction
 NRC_OFFTIMER-ONOFF    | Off Timer
 NRC_R_TUNE-ONOFF      | Look same "Info"
+NRC_APPS-ONOFF        | Apps Menü
+NRC_HOME-ONOFF        | Home
+NRC_SURROUND-ONOFF    | Surround Menü
+NRC_GUIDE-ONOFF       | eHelp
 NRC_CHG_NETWORK-ONOFF |
 NRC_CC-ONOFF          |
 NRC_SAP-ONOFF         |
@@ -170,7 +174,7 @@ NRC_TV_MUTE_ON-ONOFF  |
 NRC_TV_MUTE_OFF-ONOFF |
 NRC_DMS_CH_UP-ONOFF   |
 NRC_DMS_CH_DOWN-ONOFF |
-NRC_APPS-ONOFF        | Apps Menü
+
 
 `PTV_LaunchApp(integer $InstanzID, string $productid);`
 Startet auf dem Fernseher mit der InstanzID $InstanzID die zur ProductID $productid gehörige Applikation. 
@@ -181,6 +185,7 @@ Die Funktion liefert keinen Rückgabewert.
 ProductID            | Applikation
 ---------------------| ----------------
 0010000100000001     | Amazon Prime
+0010000200000001     | Netflix
 0010000300000001     | Cinema Now
 0010000600000001     | Pandora
 0010000F00000001     | Hulu Plus
@@ -197,7 +202,7 @@ ProductID            | Applikation
 0070000200000001     | YouTube
 0070000600000001     | Skype
 0070000900000001     | Weather
-0070001406000008     |Match Number Beginners
+0070001406000008     | Match Number Beginners
 007000C00000001      | Accu Weather
 00760108070000001    | ARD
 0077777700000001     | Produkt Support
@@ -223,4 +228,9 @@ ProductID            | Applikation
 0387878700000032     | Media Player
 0387878700000102     | Apps Market
 0387878700150020     | Kalendar
+0387878700000009     | Haupt Menü
+0387878700000032     | Media Player
+0387878700000049     | TV Spiegelung
+0387878700000014     | Media Server
+0387878700000064     | Screen Market
 
