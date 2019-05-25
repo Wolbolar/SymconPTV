@@ -3,7 +3,11 @@
   "author": "Marco Scholl&Fonzo",
   "name": "SymconPTV",
   "url": "https://github.com/Wolbolar/SymconPTV",
-  "version": "1.01",
-  "build": 0,
+  "compatibility": {
+    "version": "5.1",
+    "date": 1491343200
+  },
+  "version": "1.0",
+  "build": 1,
   "date": 0
 }
