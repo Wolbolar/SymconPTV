@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 class PTV extends IPSModule
 {
     public function Create()
     {
         parent::Create();
-        $this->RegisterPropertyString("Host", "");
+        $this->RegisterPropertyString('Host', '');
     }
 
     public function Destroy()
@@ -21,75 +23,75 @@ class PTV extends IPSModule
     public function ApplyChanges()
     {
         parent::ApplyChanges();
-        $this->ConnectParent("{111046C4-5DCE-4622-9741-4A9BCCAFA92D}");
+        $this->ConnectParent('{111046C4-5DCE-4622-9741-4A9BCCAFA92D}');
 
         if (IPS_GetKernelRunlevel() !== KR_READY) {
             return;
         }
-        $this->RegisterVariableBoolean("STATE", $this->Translate("State"), "~Switch");
-        $this->EnableAction("STATE");
-        $this->RegisterVariableInteger("VOLUME", $this->Translate("Volume"), "~Intensity.100");
-        $this->EnableAction("VOLUME");
+        $this->RegisterVariableBoolean('STATE', $this->Translate('State'), '~Switch');
+        $this->EnableAction('STATE');
+        $this->RegisterVariableInteger('VOLUME', $this->Translate('Volume'), '~Intensity.100');
+        $this->EnableAction('VOLUME');
         $PanasonicTV_navi_ass = [
-            [0, $this->Translate("Up"), "", -1],
-            [1, $this->Translate("Left"), "", -1],
-            [2, $this->Translate("Right"), "", -1],
-            [3, $this->Translate("Down"), "", -1],
-            [4, $this->Translate("Ok"), "", -1]];
-        $this->RegisterProfileIntegerAss("PanasonicTV.Navigation", "Move", "", "", 0, 4, 0, 0, $PanasonicTV_navi_ass);
-        $this->RegisterVariableInteger("PanasonicTVNavigation", $this->Translate("Navigation"), "PanasonicTV.Navigation", 2);
-        $this->EnableAction("PanasonicTVNavigation");
+            [0, $this->Translate('Up'), '', -1],
+            [1, $this->Translate('Left'), '', -1],
+            [2, $this->Translate('Right'), '', -1],
+            [3, $this->Translate('Down'), '', -1],
+            [4, $this->Translate('Ok'), '', -1]];
+        $this->RegisterProfileIntegerAss('PanasonicTV.Navigation', 'Move', '', '', 0, 4, 0, 0, $PanasonicTV_navi_ass);
+        $this->RegisterVariableInteger('PanasonicTVNavigation', $this->Translate('Navigation'), 'PanasonicTV.Navigation', 2);
+        $this->EnableAction('PanasonicTVNavigation');
         $PanasonicTV_vol_ass = [
-            [0, $this->Translate("Volume Up"), "", -1],
-            [1, $this->Translate("Volume Down"), "", -1]];
-        $this->RegisterProfileIntegerAss("PanasonicTV.Volume", "Intensity", "", "", 0, 1, 0, 0, $PanasonicTV_vol_ass);
-        $this->RegisterVariableInteger("PanasonicTVVolume", $this->Translate("Volume"), "PanasonicTV.Volume", 3);
-        $this->EnableAction("PanasonicTVVolume");
+            [0, $this->Translate('Volume Up'), '', -1],
+            [1, $this->Translate('Volume Down'), '', -1]];
+        $this->RegisterProfileIntegerAss('PanasonicTV.Volume', 'Intensity', '', '', 0, 1, 0, 0, $PanasonicTV_vol_ass);
+        $this->RegisterVariableInteger('PanasonicTVVolume', $this->Translate('Volume'), 'PanasonicTV.Volume', 3);
+        $this->EnableAction('PanasonicTVVolume');
         $PanasonicTV_channel_ass = [
-            [0, $this->Translate("Channel Up"), "", -1],
-            [1, $this->Translate("Channel Down"), "", -1]];
-        $this->RegisterProfileIntegerAss("PanasonicTV.Channel", "Execute", "", "", 0, 1, 0, 0, $PanasonicTV_channel_ass);
-        $this->RegisterVariableInteger("PanasonicTVChannel", $this->Translate("Channel"), "PanasonicTV.Channel", 4);
-        $this->EnableAction("PanasonicTVChannel");
+            [0, $this->Translate('Channel Up'), '', -1],
+            [1, $this->Translate('Channel Down'), '', -1]];
+        $this->RegisterProfileIntegerAss('PanasonicTV.Channel', 'Execute', '', '', 0, 1, 0, 0, $PanasonicTV_channel_ass);
+        $this->RegisterVariableInteger('PanasonicTVChannel', $this->Translate('Channel'), 'PanasonicTV.Channel', 4);
+        $this->EnableAction('PanasonicTVChannel');
         $PanasonicTV_color_ass = [
-            [0, $this->Translate("Red"), "", 16711680],
-            [1, $this->Translate("Green"), "", 65280],
-            [2, $this->Translate("Yellow"), "", 16776960],
-            [3, $this->Translate("Blue"), "", 255]];
-        $this->RegisterProfileIntegerAss("PanasonicTV.Color", "Paintbrush", "", "", 0, 3, 0, 0, $PanasonicTV_color_ass);
-        $this->RegisterVariableInteger("PanasonicTVColor", $this->Translate("Color"), "PanasonicTV.Color", 5);
-        $this->EnableAction("PanasonicTVColor");
+            [0, $this->Translate('Red'), '', 16711680],
+            [1, $this->Translate('Green'), '', 65280],
+            [2, $this->Translate('Yellow'), '', 16776960],
+            [3, $this->Translate('Blue'), '', 255]];
+        $this->RegisterProfileIntegerAss('PanasonicTV.Color', 'Paintbrush', '', '', 0, 3, 0, 0, $PanasonicTV_color_ass);
+        $this->RegisterVariableInteger('PanasonicTVColor', $this->Translate('Color'), 'PanasonicTV.Color', 5);
+        $this->EnableAction('PanasonicTVColor');
         $PanasonicTV_playback_ass = [
-            [0, $this->Translate("Rewind"), "", -1],
-            [1, $this->Translate("Pause"), "", -1],
-            [2, $this->Translate("Play"), "", -1],
-            [3, $this->Translate("Stop"), "", -1],
-            [4, $this->Translate("Fast Forward"), "", -1]];
-        $this->RegisterProfileIntegerAss("PanasonicTV.Playback", "Script", "", "", 0, 4, 0, 0, $PanasonicTV_playback_ass);
-        $this->RegisterVariableInteger("PanasonicTVPlayback", $this->Translate("Playback"), "PanasonicTV.Playback", 6);
-        $this->EnableAction("PanasonicTVPlayback");
+            [0, $this->Translate('Rewind'), '', -1],
+            [1, $this->Translate('Pause'), '', -1],
+            [2, $this->Translate('Play'), '', -1],
+            [3, $this->Translate('Stop'), '', -1],
+            [4, $this->Translate('Fast Forward'), '', -1]];
+        $this->RegisterProfileIntegerAss('PanasonicTV.Playback', 'Script', '', '', 0, 4, 0, 0, $PanasonicTV_playback_ass);
+        $this->RegisterVariableInteger('PanasonicTVPlayback', $this->Translate('Playback'), 'PanasonicTV.Playback', 6);
+        $this->EnableAction('PanasonicTVPlayback');
         $PanasonicTV_numeric_ass = [
-            [0, "0", "", -1],
-            [1, "1", "", -1],
-            [2, "2", "", -1],
-            [3, "3", "", -1],
-            [4, "4", "", -1],
-            [5, "5", "", -1],
-            [6, "6", "", -1],
-            [7, "7", "", -1],
-            [8, "8", "", -1],
-            [9, "9", "", -1]];
-        $this->RegisterProfileIntegerAss("PanasonicTV.Numeric", "Calendar", "", "", 0, 9, 0, 0, $PanasonicTV_numeric_ass);
-        $this->RegisterVariableInteger("PanasonicTVNumeric", $this->Translate("Numeric"), "PanasonicTV.Numeric", 7);
-        $this->EnableAction("PanasonicTVNumeric");
-        $this->RegisterVariableBoolean("MUTE", $this->Translate("Mute"), "~Switch");
-        $this->EnableAction("MUTE");
+            [0, '0', '', -1],
+            [1, '1', '', -1],
+            [2, '2', '', -1],
+            [3, '3', '', -1],
+            [4, '4', '', -1],
+            [5, '5', '', -1],
+            [6, '6', '', -1],
+            [7, '7', '', -1],
+            [8, '8', '', -1],
+            [9, '9', '', -1]];
+        $this->RegisterProfileIntegerAss('PanasonicTV.Numeric', 'Calendar', '', '', 0, 9, 0, 0, $PanasonicTV_numeric_ass);
+        $this->RegisterVariableInteger('PanasonicTVNumeric', $this->Translate('Numeric'), 'PanasonicTV.Numeric', 7);
+        $this->EnableAction('PanasonicTVNumeric');
+        $this->RegisterVariableBoolean('MUTE', $this->Translate('Mute'), '~Switch');
+        $this->EnableAction('MUTE');
         $PanasonicTV_menu_ass = [
-            [0, $this->Translate("Home"), "", -1],
-            [1, $this->Translate("Info"), "", -1]];
-        $this->RegisterProfileIntegerAss("PanasonicTV.Menu", "Database", "", "", 0, 1, 0, 0, $PanasonicTV_menu_ass);
-        $this->RegisterVariableInteger("PanasonicTVMenu", $this->Translate("Menu"), "PanasonicTV.Menu", 8);
-        $this->EnableAction("PanasonicTVMenu");
+            [0, $this->Translate('Home'), '', -1],
+            [1, $this->Translate('Info'), '', -1]];
+        $this->RegisterProfileIntegerAss('PanasonicTV.Menu', 'Database', '', '', 0, 1, 0, 0, $PanasonicTV_menu_ass);
+        $this->RegisterVariableInteger('PanasonicTVMenu', $this->Translate('Menu'), 'PanasonicTV.Menu', 8);
+        $this->EnableAction('PanasonicTVMenu');
     }
 
     /** @noinspection PhpMissingParentCallCommonInspection */
@@ -125,7 +127,7 @@ class PTV extends IPSModule
 
         if (@$properties->X_ScreenState) {
 
-            SetValueBoolean($this->GetIDForIdent("STATE"), $properties->X_ScreenState == 'on');
+            SetValueBoolean($this->GetIDForIdent('STATE'), $properties->X_ScreenState == 'on');
         }
     }
 
@@ -133,7 +135,7 @@ class PTV extends IPSModule
     {
         $this->SetValue($Ident, $Value);
         switch ($Ident) {
-            case "STATE":
+            case 'STATE':
                 $this->Power_Off();
                 break;
             case 'VOLUME':
@@ -146,7 +148,7 @@ class PTV extends IPSModule
                     $this->SetMute(false);
                 }
                 break;
-            case "PanasonicTVNavigation":
+            case 'PanasonicTVNavigation':
                 if ($Value == 0) {
                     $this->Up();
                 } elseif ($Value == 1) {
@@ -159,21 +161,21 @@ class PTV extends IPSModule
                     $this->Ok();
                 }
                 break;
-            case "PanasonicTVVolume":
+            case 'PanasonicTVVolume':
                 if ($Value == 0) {
                     $this->VolumeUp();
                 } elseif ($Value == 1) {
                     $this->VolumeDown();
                 }
                 break;
-            case "PanasonicTVChannel":
+            case 'PanasonicTVChannel':
                 if ($Value == 0) {
                     $this->ChannelUp();
                 } elseif ($Value == 1) {
                     $this->ChannelDown();
                 }
                 break;
-            case "PanasonicTVColor":
+            case 'PanasonicTVColor':
                 if ($Value == 0) {
                     $this->Red();
                 } elseif ($Value == 1) {
@@ -184,7 +186,7 @@ class PTV extends IPSModule
                     $this->Blue();
                 }
                 break;
-            case "PanasonicTVPlayback":
+            case 'PanasonicTVPlayback':
                 if ($Value == 0) {
                     $this->Rewind();
                 } elseif ($Value == 1) {
@@ -197,7 +199,7 @@ class PTV extends IPSModule
                     $this->Fast_Forward();
                 }
                 break;
-            case "PanasonicTVNumeric":
+            case 'PanasonicTVNumeric':
                 if ($Value == 0) {
                     $this->Key0();
                 } elseif ($Value == 1) {
@@ -220,7 +222,7 @@ class PTV extends IPSModule
                     $this->Key9();
                 }
                 break;
-            case "PanasonicTVMenu":
+            case 'PanasonicTVMenu':
                 if ($Value == 0) {
                     $this->Menu();
                 } elseif ($Value == 2) {
@@ -228,7 +230,7 @@ class PTV extends IPSModule
                 }
                 break;
             default:
-                $this->SendDebug("PanasonicTV", "Invalid ident", 0);
+                $this->SendDebug('PanasonicTV', 'Invalid ident', 0);
         }
     }
 
@@ -265,13 +267,13 @@ class PTV extends IPSModule
 
     public function Netflix()
     {
-        $productid = "App.NETFLIX";  // Netflix
+        $productid = 'App.NETFLIX';  // Netflix
         $this->LaunchApp($productid);
     }
 
     public function Recorded_TV()
     {
-        $productid = "App.RECORDED_TV";  // recorded tv
+        $productid = 'App.RECORDED_TV';  // recorded tv
         $this->LaunchApp($productid);
     }
 
@@ -334,7 +336,7 @@ class PTV extends IPSModule
 
     public function GetMute()
     {
-        return (boolean) ((int) $this->SoapRequest(
+        return (bool) ((int) $this->SoapRequest(
             'dmr/control_0', 'schemas-upnp-org:service:RenderingControl:1', 'GetMute', [
                                'args'      => '<InstanceID>0</InstanceID><Channel>Master</Channel>',
                                'returnXml' => false]
@@ -355,7 +357,7 @@ class PTV extends IPSModule
     {
         $volume = intval($volume);
         if ($volume > 100 || $volume < 0) {
-            $this->SendDebug("Panaonic TV", "Bad request to volume control. Must be between 0 and 100", 0);
+            $this->SendDebug('Panaonic TV', 'Bad request to volume control. Must be between 0 and 100', 0);
         }
         return $this->SoapRequest(
             'dmr/control_0', 'schemas-upnp-org:service:RenderingControl:1', 'SetVolume', [
@@ -366,409 +368,409 @@ class PTV extends IPSModule
 
     public function VolumeUp()
     {
-        $key = "NRC_VOLUP-ONOFF"; // volume up
+        $key = 'NRC_VOLUP-ONOFF'; // volume up
         $this->SendKey($key);
     }
 
     public function VolumeDown()
     {
-        $key = "NRC_VOLDOWN-ONOFF";  // volume down
+        $key = 'NRC_VOLDOWN-ONOFF';  // volume down
         $this->SendKey($key);
     }
 
     /**
-     * Up
+     * Up.
      */
     public function Up()
     {
-        $key = "NRC_UP-ONOFF";  // up
+        $key = 'NRC_UP-ONOFF';  // up
         $this->SendKey($key);
     }
 
     /**
-     * Down
+     * Down.
      */
     public function Down()
     {
-        $key = "NRC_DOWN-ONOFF";  // down
+        $key = 'NRC_DOWN-ONOFF';  // down
         $this->SendKey($key);
     }
 
     /**
-     * Right
+     * Right.
      */
     public function Right()
     {
-        $key = "NRC_RIGHT-ONOFF";  // right
+        $key = 'NRC_RIGHT-ONOFF';  // right
         $this->SendKey($key);
     }
 
     /**
-     * Left
+     * Left.
      */
     public function Left()
     {
-        $key = "NRC_LEFT-ONOFF";  // left
+        $key = 'NRC_LEFT-ONOFF';  // left
         $this->SendKey($key);
     }
 
     /**
-     * Ok
+     * Ok.
      */
     public function Ok()
     {
-        $key = "NRC_ENTER-ONOFF";  // enter
+        $key = 'NRC_ENTER-ONOFF';  // enter
         $this->SendKey($key);
     }
 
     /**
-     * Select
+     * Select.
      */
     public function Select()
     {
-        $key = "NRC_ENTER-ONOFF";  // enter
+        $key = 'NRC_ENTER-ONOFF';  // enter
         $this->SendKey($key);
     }
 
     public function ChannelDown()
     {
-        $key = "NRC_CH_DOWN-ONOFF";  // channel down
+        $key = 'NRC_CH_DOWN-ONOFF';  // channel down
         $this->SendKey($key);
     }
 
     public function ChannelUp()
     {
-        $key = "NRC_CH_UP-ONOFF";  // channel up
+        $key = 'NRC_CH_UP-ONOFF';  // channel up
         $this->SendKey($key);
     }
 
     public function TV()
     {
-        $key = "NRC_TV-ONOFF";  // TV
+        $key = 'NRC_TV-ONOFF';  // TV
         $this->SendKey($key);
     }
 
     public function AV()
     {
-        $key = "NRC_CHG_INPUT-ONOFF";  // AV
+        $key = 'NRC_CHG_INPUT-ONOFF';  // AV
         $this->SendKey($key);
     }
 
     public function Red()
     {
-        $key = "NRC_RED-ONOFF";  // red
+        $key = 'NRC_RED-ONOFF';  // red
         $this->SendKey($key);
     }
 
     public function Green()
     {
-        $key = "NRC_GREEN-ONOFF";  // green
+        $key = 'NRC_GREEN-ONOFF';  // green
         $this->SendKey($key);
     }
 
     public function Yellow()
     {
-        $key = "NRC_YELLOW-ONOFF";  // yellow
+        $key = 'NRC_YELLOW-ONOFF';  // yellow
         $this->SendKey($key);
     }
 
     public function Blue()
     {
-        $key = "NRC_BLUE-ONOFF";  // blue
+        $key = 'NRC_BLUE-ONOFF';  // blue
         $this->SendKey($key);
     }
 
     public function VIERA_Tools()
     {
-        $key = "NRC_VTOOLS-ONOFF";  // VIERA tools
+        $key = 'NRC_VTOOLS-ONOFF';  // VIERA tools
         $this->SendKey($key);
     }
 
     public function Cancel()
     {
-        $key = "NRC_CANCEL-ONOFF";  // Cancel / Exit
+        $key = 'NRC_CANCEL-ONOFF';  // Cancel / Exit
         $this->SendKey($key);
     }
 
     public function Option()
     {
-        $key = "NRC_SUBMENU-ONOFF";  // Option
+        $key = 'NRC_SUBMENU-ONOFF';  // Option
         $this->SendKey($key);
     }
 
     public function KeyReturn()
     {
-        $key = "NRC_RETURN-ONOFF";  // Return
+        $key = 'NRC_RETURN-ONOFF';  // Return
         $this->SendKey($key);
     }
 
     public function Control_Center()
     {
-        $key = "NRC_ENTER-ONOFF";  // Control Center click / enter
+        $key = 'NRC_ENTER-ONOFF';  // Control Center click / enter
         $this->SendKey($key);
     }
 
     public function Control_Right()
     {
-        $key = "NRC_RIGHT-ONOFF";  // Control RIGHT
+        $key = 'NRC_RIGHT-ONOFF';  // Control RIGHT
         $this->SendKey($key);
     }
 
     public function Control_Left()
     {
-        $key = "NRC_LEFT-ONOFF";  // Control LEFT
+        $key = 'NRC_LEFT-ONOFF';  // Control LEFT
         $this->SendKey($key);
     }
 
     public function Control_Up()
     {
-        $key = "NRC_UP-ONOFF";  // Control UP
+        $key = 'NRC_UP-ONOFF';  // Control UP
         $this->SendKey($key);
     }
 
     public function Control_Down()
     {
-        $key = "NRC_DOWN-ONOFF";  // Control DOWN
+        $key = 'NRC_DOWN-ONOFF';  // Control DOWN
         $this->SendKey($key);
     }
 
     public function Button_3D()
     {
-        $key = "NRC_3D-ONOFF";  // 3D button
+        $key = 'NRC_3D-ONOFF';  // 3D button
         $this->SendKey($key);
     }
 
     public function SD()
     {
-        $key = "NRC_SD_CARD-ONOFF";  // SD-card
+        $key = 'NRC_SD_CARD-ONOFF';  // SD-card
         $this->SendKey($key);
     }
 
     public function Display_Mode()
     {
-        $key = "NRC_DISP_MODE-ONOFF";  // Display mode / Aspect ratio
+        $key = 'NRC_DISP_MODE-ONOFF';  // Display mode / Aspect ratio
         $this->SendKey($key);
     }
 
     public function Menu()
     {
-        $key = "NRC_MENU-ONOFF";  // Menu
+        $key = 'NRC_MENU-ONOFF';  // Menu
         $this->SendKey($key);
     }
 
     public function VIERA_Connect()
     {
-        $key = "NRC_INTERNET-ONOFF";  // VIERA connect
+        $key = 'NRC_INTERNET-ONOFF';  // VIERA connect
         $this->SendKey($key);
     }
 
     public function VIERA_Link()
     {
-        $key = "NRC_VIERA_LINK-ONOFF";  // VIERA link
+        $key = 'NRC_VIERA_LINK-ONOFF';  // VIERA link
         $this->SendKey($key);
     }
 
     public function EPG()
     {
-        $key = "NRC_EPG-ONOFF";  // Guide / EPG
+        $key = 'NRC_EPG-ONOFF';  // Guide / EPG
         $this->SendKey($key);
     }
 
     public function Text()
     {
-        $key = "NRC_TEXT-ONOFF";  // Text / TTV
+        $key = 'NRC_TEXT-ONOFF';  // Text / TTV
         $this->SendKey($key);
     }
 
     public function Subtitles()
     {
-        $key = "NRC_STTL-ONOFF";  // STTL / Subtitles
+        $key = 'NRC_STTL-ONOFF';  // STTL / Subtitles
         $this->SendKey($key);
     }
 
     public function Info()
     {
-        $key = "NRC_INFO-ONOFF";  // Info
+        $key = 'NRC_INFO-ONOFF';  // Info
         $this->SendKey($key);
     }
 
     public function TTV_Index()
     {
-        $key = "NRC_INDEX-ONOFF";  // TTV index
+        $key = 'NRC_INDEX-ONOFF';  // TTV index
         $this->SendKey($key);
     }
 
     public function TTV_Hold()
     {
-        $key = "NRC_HOLD-ONOFF";  // TTV hold / image freeze
+        $key = 'NRC_HOLD-ONOFF';  // TTV hold / image freeze
         $this->SendKey($key);
     }
 
     public function Last_View()
     {
-        $key = "NRC_R_TUNE-ONOFF";  // Last view
+        $key = 'NRC_R_TUNE-ONOFF';  // Last view
         $this->SendKey($key);
     }
 
     public function Power_Off()
     {
-        $key = "NRC_POWER-ONOFF";  // Power off
+        $key = 'NRC_POWER-ONOFF';  // Power off
         $this->SendKey($key);
     }
 
     public function Rewind()
     {
-        $key = "NRC_REW-ONOFF";  // rewind
+        $key = 'NRC_REW-ONOFF';  // rewind
         $this->SendKey($key);
     }
 
     public function Play()
     {
-        $key = "NRC_PLAY-ONOFF";  // play
+        $key = 'NRC_PLAY-ONOFF';  // play
         $this->SendKey($key);
     }
 
     public function Fast_Forward()
     {
-        $key = "NRC_FF-ONOFF";  // fast forward
+        $key = 'NRC_FF-ONOFF';  // fast forward
         $this->SendKey($key);
     }
 
     public function Skip_Previous()
     {
-        $key = "NRC_SKIP_PREV-ONOFF";  // skip previous
+        $key = 'NRC_SKIP_PREV-ONOFF';  // skip previous
         $this->SendKey($key);
     }
 
     public function Pause()
     {
-        $key = "NRC_PAUSE-ONOFF";  // pause
+        $key = 'NRC_PAUSE-ONOFF';  // pause
         $this->SendKey($key);
     }
 
     public function Skip_Next()
     {
-        $key = "NRC_SKIP_NEXT-ONOFF";  // skip next
+        $key = 'NRC_SKIP_NEXT-ONOFF';  // skip next
         $this->SendKey($key);
     }
 
     public function Stop()
     {
-        $key = "NRC_STOP-ONOFF";  // stop
+        $key = 'NRC_STOP-ONOFF';  // stop
         $this->SendKey($key);
     }
 
     public function Record()
     {
-        $key = "NRC_REC-ONOFF";  // record
+        $key = 'NRC_REC-ONOFF';  // record
         $this->SendKey($key);
     }
 
     public function Key1()
     {
-        $key = "NRC_D1-ONOFF";  // numeric button 1
+        $key = 'NRC_D1-ONOFF';  // numeric button 1
         $this->SendKey($key);
     }
 
     public function Key2()
     {
-        $key = "NRC_D2-ONOFF";  // numeric button 2
+        $key = 'NRC_D2-ONOFF';  // numeric button 2
         $this->SendKey($key);
     }
 
     public function Key3()
     {
-        $key = "NRC_D3-ONOFF";  // numeric button 3
+        $key = 'NRC_D3-ONOFF';  // numeric button 3
         $this->SendKey($key);
     }
 
     public function Key4()
     {
-        $key = "NRC_D4-ONOFF";  // numeric button 4
+        $key = 'NRC_D4-ONOFF';  // numeric button 4
         $this->SendKey($key);
     }
 
     public function Key5()
     {
-        $key = "NRC_D5-ONOFF";  // numeric button 5
+        $key = 'NRC_D5-ONOFF';  // numeric button 5
         $this->SendKey($key);
     }
 
     public function Key6()
     {
-        $key = "NRC_D6-ONOFF";  // numeric button 6
+        $key = 'NRC_D6-ONOFF';  // numeric button 6
         $this->SendKey($key);
     }
 
     public function Key7()
     {
-        $key = "NRC_D7-ONOFF";  // numeric button 7
+        $key = 'NRC_D7-ONOFF';  // numeric button 7
         $this->SendKey($key);
     }
 
     public function Key8()
     {
-        $key = "NRC_D8-ONOFF";  // numeric button 8
+        $key = 'NRC_D8-ONOFF';  // numeric button 8
         $this->SendKey($key);
     }
 
     public function Key9()
     {
-        $key = "NRC_D9-ONOFF";  // numeric button 9
+        $key = 'NRC_D9-ONOFF';  // numeric button 9
         $this->SendKey($key);
     }
 
     public function Key0()
     {
-        $key = "NRC_D0-ONOFF";  // numeric button 0
+        $key = 'NRC_D0-ONOFF';  // numeric button 0
         $this->SendKey($key);
     }
 
     public function Noise_Reduction()
     {
-        $key = "NRC_P_NR-ONOFF";  // Noise reduction
+        $key = 'NRC_P_NR-ONOFF';  // Noise reduction
         $this->SendKey($key);
     }
 
     public function Off_Timer()
     {
-        $key = "NRC_OFFTIMER-ONOFF";  // off timer
+        $key = 'NRC_OFFTIMER-ONOFF';  // off timer
         $this->SendKey($key);
     }
 
     public function Data()
     {
-        $key = "NRC_DATA-ONOFF";  // data
+        $key = 'NRC_DATA-ONOFF';  // data
         $this->SendKey($key);
     }
 
     public function BD()
     {
-        $key = "NRC_BD-ONOFF";  // BD
+        $key = 'NRC_BD-ONOFF';  // BD
         $this->SendKey($key);
     }
 
     public function Favorite()
     {
-        $key = "NRC_FAVORITE-ONOFF";  // Favorite
+        $key = 'NRC_FAVORITE-ONOFF';  // Favorite
         $this->SendKey($key);
     }
 
     public function Game()
     {
-        $key = "NRC_GAME-ONOFF";  // Game
+        $key = 'NRC_GAME-ONOFF';  // Game
         $this->SendKey($key);
     }
 
     public function VOD()
     {
-        $key = "NRC_VOD-ONOFF";  // VOD
+        $key = 'NRC_VOD-ONOFF';  // VOD
         $this->SendKey($key);
     }
 
     public function Eco()
     {
-        $key = "NRC_ECO-ONOFF";  // Eco
+        $key = 'NRC_ECO-ONOFF';  // Eco
         $this->SendKey($key);
     }
 
@@ -803,7 +805,7 @@ class PTV extends IPSModule
         } else {
             $profile = IPS_GetVariableProfile($Name);
             if ($profile['ProfileType'] != 1) {
-                $this->SendDebug("PanasonicTV", "Variable profile type does not match for profile " . $Name, 0);
+                $this->SendDebug('PanasonicTV', 'Variable profile type does not match for profile ' . $Name, 0);
             }
         }
 
@@ -818,7 +820,7 @@ class PTV extends IPSModule
 
     protected function RegisterProfileIntegerAss($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $Stepsize, $Digits, $Associations)
     {
-        if (sizeof($Associations) === 0) {
+        if (count($Associations) === 0) {
             $MinValue = 0;
             $MaxValue = 0;
         }
@@ -837,5 +839,4 @@ class PTV extends IPSModule
         }
 
     }
-
 }
